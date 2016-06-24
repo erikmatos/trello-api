@@ -1,14 +1,22 @@
-'use strict';
+"use strict"
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+let fs = require('fs')
+let restify = require('restify')
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+
+function watcher(req, res, next) {
+  //res.send('hello ' + req.params);
+
+  console.log(req.params)
+  res.send()
+  next();
+}
+
+let server = restify.createServer()
+
+server.get('/1/trello/webhook', watcher)
+
+server.listen(8080, function() {
+  console.log('%s listening at %s', server.name, server.url)
+});
+
