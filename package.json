@@ -1,6 +1,5 @@
 {
   "name": "trello.api",
-  "main": "app.js",
   "version": "0.0.1",
   "devDependencies": {
     "restify" : "4.1.1"
@@ -10,6 +9,6 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "start": "node app/app.js"
+    "start": "node server.js"
   }
 }
