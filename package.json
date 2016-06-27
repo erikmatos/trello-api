@@ -1,6 +1,7 @@
 {
   "name": "trello.api",
   "main": "app.js",
+  "version": "0.0.1",
   "devDependencies": {
     "restify" : "4.1.1"
   },
