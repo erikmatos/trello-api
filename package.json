@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "main" : "index.js",
   "devDependencies": {
-    "restify" : "4.1.1"
+    "restify" : "4.1.1",
+    "express": "^4.13.3"
   },
   "engines": {
     "node": "4.4.5"
