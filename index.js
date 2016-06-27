@@ -19,7 +19,9 @@ function verifyTrelloWebhookRequest(request, secret, callbackURL) {
     // Double-HMAC to blind any timing channel attacks
     // https://www.isecpartners.com/blog/2011/february/double-hmac-verification.asp
     var base64Digest = function (s) {
-        return crypto.createHmac('sha1', secret).update(s).digest('base64');
+        var _crypto = crypto.createHmac('sha1', secret).update(s).digest('base64');
+        log.info({crypto: _crypto})
+        return _crypto;
     }
     var content = request.body + callbackURL;
     var doubleHash = base64Digest(base64Digest(content));
@@ -35,7 +37,7 @@ function doHead(req, res, next) {
 
 function doPost(req, res, next) {
     log.info({method: "POST"})
-    var isValid = verifyTrelloWebhookRequest(req, "f464c9fadd96fe7faea26f2198a156f760f0ec2a57d9741cafb754f333454046", "https://kyra-consulting.herokuapp.com/1/trello/webhook")
+    var isValid = verifyTrelloWebhookRequest(req, "cb76b78623988c5ec92f947c764707df", "https://kyra-consulting.herokuapp.com/1/trello/webhook")
     log.info({trello_content: req.headers['x-trello-webhook'], valid: isValid})
     doFlush(req, res, next);
 }
