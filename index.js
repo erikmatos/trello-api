@@ -35,8 +35,9 @@ function doHead(req, res, next) {
 
 function doPost(req, res, next) {
     log.info({method: "POST"})
-    verifyTrelloWebhookRequest(req, "f464c9fadd96fe7faea26f2198a156f760f0ec2a57d9741cafb754f333454046", "https://kyra-consulting.herokuapp.com/1/trello/webhook")
+    var isValid = verifyTrelloWebhookRequest(req, "f464c9fadd96fe7faea26f2198a156f760f0ec2a57d9741cafb754f333454046", "https://kyra-consulting.herokuapp.com/1/trello/webhook")
     log.info({trello_content: req.headers['x-trello-webhook'], valid: isValid})
+    doFlush(req, res, next);
 }
 
 function doFlush(req, res, next){
