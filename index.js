@@ -1,7 +1,20 @@
 var restify = require('restify')
+var bunyan = require('bunyan')
+
+// Setting a log to get all activities
+var log = bunyan.createLogger({
+    name: 'trello-api',
+    level: process.env.LOG_LEVEL || 'info',
+    stream: process.stdout,
+    serializers: bunyan.stdSerializers
+})
+
 
 function watcher(req, res, next) {
     console.log(req.getQuery())
+
+    log.info({params: req.params, query: req.getQuery()});
+
     res.send()
     next()
 }
