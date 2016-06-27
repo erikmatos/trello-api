@@ -19,7 +19,7 @@ function doHead(req, res, next) {
 function doPost(req, res, next) {
     log.debug({method: "POST"})
 
-    log.info({"headers": req.getHeaders()})
+    log.info({"headers": req.headers})
 
     //log.info({"body": req.body})
     doFlush(req, res, next);
