@@ -11,10 +11,7 @@ var log = bunyan.createLogger({
 
 
 function watcher(req, res, next) {
-    console.log(req.getQuery())
-
-    log.info({params: req.params, query: req.getQuery(), headers: req.headers});
-
+    log.info({content: req.headers['x-trello-webhook']})
     res.send()
     next()
 }
