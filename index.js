@@ -18,6 +18,9 @@ function doHead(req, res, next) {
 
 function doPost(req, res, next) {
     log.debug({method: "POST"})
+    console.log(req)
+    console.log(req.params)
+    console.log(req.body.toJSON())
     log.info({"body": req.body});
     doFlush(req, res, next);
 }
@@ -28,6 +31,8 @@ function doFlush(req, res, next){
 }
 
 var server = restify.createServer()
+
+server.use(restify.bodyParser({ mapParams: false }))
 
 server.name = "trello-api"
 
