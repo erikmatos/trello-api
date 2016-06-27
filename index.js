@@ -19,7 +19,13 @@ function doHead(req, res, next) {
 function doPost(req, res, next) {
     log.debug({method: "POST"})
 
-    log.info({"headers": req.headers})
+    var trelloServerAddress = req.headers('x-forwarded-for');
+
+    if ( trelloServerAddress == '107.23.104.115' || trelloServerAddress == '107.23.149.70' || trelloServerAddress == '54.152.166.250' || trelloServerAddress == '54.164.77.56' ) {
+        log.info({'valid', 'true'})
+    }
+
+    log.info({"origin": trelloServerAddress})
 
     //log.info({"body": req.body})
     doFlush(req, res, next);
