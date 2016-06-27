@@ -25,16 +25,21 @@ function verifyTrelloWebhookRequest(request, secret, callbackURL) {
     var doubleHash = base64Digest(base64Digest(content));
     var headerHash = base64Digest(request.headers['x-trello-webhook']);
 
-
-
     return doubleHash == headerHash;
 }
 
-function watcher(req, res, next) {
-    log.info("call");
-    var isValid = verifyTrelloWebhookRequest(req, "f464c9fadd96fe7faea26f2198a156f760f0ec2a57d9741cafb754f333454046", "https://kyra-consulting.herokuapp.com/1/trello/webhook");
-    log.info({trello_content: req.headers['x-trello-webhook'], valid: isValid})
+function doHead(req, res, next) {
+    log.info({method: "HEAD"})
+    doFlush(req, res, next);
+}
 
+function doPost(req, res, next) {
+    log.info({method: "POST"})
+    verifyTrelloWebhookRequest(req, "f464c9fadd96fe7faea26f2198a156f760f0ec2a57d9741cafb754f333454046", "https://kyra-consulting.herokuapp.com/1/trello/webhook")
+    log.info({trello_content: req.headers['x-trello-webhook'], valid: isValid})
+}
+
+function doFlush(req, res, next){
     res.send()
     next()
 }
@@ -43,7 +48,9 @@ var server = restify.createServer()
 
 server.name = "trello-api"
 
-server.head('/1/trello/webhook', watcher)
+server.head('/1/trello/webhook', doHead)
+
+server.post('/1/trello/webhook', doPost)
 
 var port = (process.env.PORT || 5000)
 
