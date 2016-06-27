@@ -1,5 +1,7 @@
 var restify = require('restify')
 var bunyan = require('bunyan')
+var crypto = require('crypto')
+
 
 // Setting a log to get all activities
 var log = bunyan.createLogger({
@@ -9,9 +11,27 @@ var log = bunyan.createLogger({
     serializers: bunyan.stdSerializers
 })
 
+var base64Digest = function (content) {
+    return crypto.createHmac('sha1', 'f464c9fadd96fe7faea26f2198a156f760f0ec2a57d9741cafb754f333454046').update(content).digest('base64');
+}
+
+function verifyTrelloWebhookRequest(request, secret, callbackURL) {
+    // Double-HMAC to blind any timing channel attacks
+    // https://www.isecpartners.com/blog/2011/february/double-hmac-verification.asp
+    var base64Digest = function (s) {
+        return crypto.createHmac('sha1', secret).update(s).digest('base64');
+    }
+    var content = request.body + callbackURL;
+    var doubleHash = base64Digest(base64Digest(content));
+    var headerHash = base64Digest(request.headers['x-trello-webhook']);
+    return doubleHash == headerHash;
+}
 
 function watcher(req, res, next) {
-    log.info({content: req.headers['x-trello-webhook']})
+
+    var isValid = verifyTrelloWebhookRequest(req, "f464c9fadd96fe7faea26f2198a156f760f0ec2a57d9741cafb754f333454046", "https://kyra-consulting.herokuapp.com/1/trello/webhook");
+    log.info({trello_content: req.headers['x-trello-webhook'], valid: isValid})
+
     res.send()
     next()
 }
@@ -19,10 +39,6 @@ function watcher(req, res, next) {
 var server = restify.createServer()
 
 server.name = "trello-api"
-
-server.get('/1/trello/webhook', watcher)
-
-server.post('/1/trello/webhook', watcher)
 
 server.head('/1/trello/webhook', watcher)
 

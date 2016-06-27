@@ -5,6 +5,7 @@
   "dependencies": {
     "restify" : "4.1.1",
     "bunyan": "1.5.1",
+    "crypto": "0.0.3",
     "express": "^4.13.3"
   },
   "engines": {
