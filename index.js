@@ -13,7 +13,7 @@ var log = bunyan.createLogger({
 function watcher(req, res, next) {
     console.log(req.getQuery())
 
-    log.info({params: req.params, query: req.getQuery()});
+    log.info({params: req.params, query: req.getQuery(), headers: req.headers});
 
     res.send()
     next()
@@ -26,6 +26,8 @@ server.name = "trello-api"
 server.get('/1/trello/webhook', watcher)
 
 server.post('/1/trello/webhook', watcher)
+
+server.head('/1/trello/webhook', watcher)
 
 var port = (process.env.PORT || 5000)
 
