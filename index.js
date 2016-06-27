@@ -18,10 +18,7 @@ function doHead(req, res, next) {
 
 function doPost(req, res, next) {
     log.debug({method: "POST"})
-    console.log(req)
-    console.log(req.params)
-    console.log(req.body.toJSON())
-    log.info({"body": req.body});
+    log.info({"body": req.body.toJSON()});
     doFlush(req, res, next);
 }
 
