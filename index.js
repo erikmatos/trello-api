@@ -1,5 +1,9 @@
+//https://developers.trello.com/apis/webhooks
+var fs = require('fs')
 var restify = require('restify')
 var bunyan = require('bunyan')
+
+var Routes = require('./routes')
 
 // Setting a log to get all activities
 var log = bunyan.createLogger({
@@ -22,12 +26,10 @@ function doPost(req, res, next) {
     var trelloServerAddress = req.headers['x-forwarded-for'];
 
     if ( trelloServerAddress == '107.23.104.115' || trelloServerAddress == '107.23.149.70' || trelloServerAddress == '54.152.166.250' || trelloServerAddress == '54.164.77.56' ) {
-        log.info({'valid': 'true'})
+        log.info({'valid': 'true', 'origin': trelloServerAddress})
     }
 
-    log.info({"origin": trelloServerAddress})
-
-    //log.info({"body": req.body})
+    log.info({"body": req.body})
     doFlush(req, res, next);
 }
 
@@ -46,6 +48,8 @@ server.head('/1/trello/webhook', doHead)
 
 server.post('/1/trello/webhook', doPost)
 
+new Routes(server)
+
 var port = (process.env.PORT || 5000)
 
 server.listen(port, function()
@@ -53,3 +57,4 @@ server.listen(port, function()
         console.log('%s listening at %s on port %s', server.name, server.url, port)
     }
 )
+
