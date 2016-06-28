@@ -1,26 +1,30 @@
 "use strict"
 
-class WebhookResponseMap {
+class WebhookMap {
 
     constructor(){
 
     }
 
     //Region Public Functions
-    post(data){
-        console.log(data)
+    get(data){
+
         if(Array.isArray(data)) {
             data = data[0]
         }
 
-        let webhookResponse = {
+        let _webhookMap = {
             action: data.action
         }
 
-        return webhookResponse
+        console.log(_webhookMap.action.id)
+
+        console.log(_webhookMap.action.data.board.name)
+
+        return _webhookMap
     }
 
     //Region Public Functions
 }
 
-module.exports = WebhookResponseMap
+module.exports = WebhookMap

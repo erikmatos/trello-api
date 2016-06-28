@@ -2,22 +2,22 @@
 
 //region Dependencies
 
-let WebhookResponseMap = require('../maps/WebhookResponseMap')
+let WebhookMap = require('../maps/webhookMap')
 
 //endregion
 
-class webhookServices {
+class WebhookService {
 
     constructor() {
 
     }
 
     post(data) {
-        console.log(data)
-        let webhookResponseMap = new WebhookResponseMap()
+        let _webhookMap = new WebhookMap()
 
-        webhookResponseMap.post(data)
+        return _webhookMap.get(data);
     }
 
 }
-    
+
+module.exports = WebhookService

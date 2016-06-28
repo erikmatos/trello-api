@@ -1,7 +1,10 @@
 "use strict"
 
 let WebhookService = require('../services/webhookService')
-
+/**
+ * Webhook API.
+ * @module Webhook
+ */
 class WebhookAPI {
 
     constructor(server) {
@@ -9,14 +12,12 @@ class WebhookAPI {
         server.post('/webhook', (req, res, next)=> {
             let webhookService = new WebhookService()
 
-            webhookService.webhookService(req.body)
-                .then(data => {
-                    res.send(200, data)
-                })
-                .catch(err => {
-                    res.send(400, err)
-                })
+            webhookService.post(req.body)
+
+            res.send()
             next()
         })
     }
 }
+
+module.exports = WebhookAPI

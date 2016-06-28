@@ -1,19 +1,18 @@
+"use strict"
 //https://developers.trello.com/apis/webhooks
-var fs = require('fs')
-var restify = require('restify')
-var bunyan = require('bunyan')
+let fs = require('fs')
+let restify = require('restify')
+let bunyan = require('bunyan')
 
-var Routes = require('./routes')
+let Routes = require('./routes')
 
 // Setting a log to get all activities
-var log = bunyan.createLogger({
+let log = bunyan.createLogger({
     name: 'trello-api',
     level: process.env.LOG_LEVEL || 'info',
     stream: process.stdout,
     serializers: bunyan.stdSerializers
 })
-
-//
 
 function doHead(req, res, next) {
     log.debug({method: "HEAD"})
@@ -38,7 +37,7 @@ function doFlush(req, res, next){
     next()
 }
 
-var server = restify.createServer()
+let server = restify.createServer()
 
 server.use(restify.bodyParser({ mapParams: false }))
 
@@ -50,7 +49,7 @@ server.post('/1/trello/webhook', doPost)
 
 new Routes(server)
 
-var port = (process.env.PORT || 5000)
+let port = (process.env.PORT || 5000)
 
 server.listen(port, function()
     {
