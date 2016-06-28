@@ -1,6 +1,6 @@
 "use strict"
 
-//region Dependencies
+//region dependencies
 
 let WebhookMap = require('../maps/webhookMap')
 

@@ -14,12 +14,11 @@ class WebhookMap {
         }
 
         let _webhookMap = {
-            action: data.action
+            action: data.action,
+            model : data.model
         }
 
-        console.log(_webhookMap.action.id)
-
-        console.log(_webhookMap.action.data.board.name)
+        console.log(_webhookMap.action.type)
 
         return _webhookMap
     }

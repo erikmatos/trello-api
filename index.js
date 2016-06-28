@@ -14,11 +14,6 @@ let log = bunyan.createLogger({
     serializers: bunyan.stdSerializers
 })
 
-function doHead(req, res, next) {
-    log.debug({method: "HEAD"})
-    doFlush(req, res, next);
-}
-
 function doPost(req, res, next) {
     log.debug({method: "POST"})
 
@@ -32,10 +27,7 @@ function doPost(req, res, next) {
     doFlush(req, res, next);
 }
 
-function doFlush(req, res, next){
-    res.send()
-    next()
-}
+
 
 let server = restify.createServer()
 
@@ -43,13 +35,9 @@ server.use(restify.bodyParser({ mapParams: false }))
 
 server.name = "trello-api"
 
-server.head('/1/trello/webhook', doHead)
-
-server.post('/1/trello/webhook', doPost)
-
 new Routes(server)
 
-let port = (process.env.PORT || 5000)
+let port = (process.env.PORT || 8000)
 
 server.listen(port, function()
     {

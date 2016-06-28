@@ -23,8 +23,6 @@ class WebhookModel {
             action: data.action
         })
 
-        console.log(_webhookSchema.action.id)
-
         return _webhookSchema;
     }
 

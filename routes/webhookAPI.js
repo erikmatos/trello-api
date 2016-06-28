@@ -10,11 +10,16 @@ class WebhookAPI {
     constructor(server) {
 
         server.post('/webhook', (req, res, next)=> {
-            let webhookService = new WebhookService()
+            let _webhookService = new WebhookService()
 
-            webhookService.post(req.body)
+            _webhookService.post(req.body)
 
             res.send()
+            next()
+        })
+
+        server.head('/webhook', (req, res, next)=> {
+            res.send(200)
             next()
         })
     }
