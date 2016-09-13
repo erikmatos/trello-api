@@ -13,6 +13,7 @@ class WebhookMap {
             data = data[0]
         }
 
+        /*
         let _webhookMap = {
             action: data.action,
             model : data.model
@@ -21,7 +22,11 @@ class WebhookMap {
         if ( _webhookMap && _webhookMap.action ) {
             console.log(_webhookMap.action.type);
         }
+        */
 
+        let _webhookMap = {
+            status: 201
+        };
 
         return _webhookMap
     }
@@ -29,4 +34,4 @@ class WebhookMap {
     //Region Public Functions
 }
 
-module.exports = WebhookMap
+module.exports = WebhookMap;

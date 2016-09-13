@@ -2,7 +2,7 @@
 
 //region dependencies
 
-let WebhookMap = require('../maps/webhookMap')
+let WebhookMap = require('../maps/webhookMap');
 
 //endregion
 
@@ -13,13 +13,14 @@ class WebhookService {
     }
 
     post(data) {
-        let _webhookMap = new WebhookMap()
+        let _webhookMap = new WebhookMap();
 
-        console.log({"body": data})
+        console.log(new Date());
+        console.log({"body": data});
 
         return _webhookMap.get(data);
     }
 
 }
 
-module.exports = WebhookService
+module.exports = WebhookService;

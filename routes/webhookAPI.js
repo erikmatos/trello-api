@@ -12,6 +12,7 @@ class WebhookAPI {
         server.post('/webhook', (req, res, next)=> {
             let _webhookService = new WebhookService();
 
+            console.log("requested");
             _webhookService.post(req.body);
 
             res.send(200);
