@@ -18,7 +18,10 @@ class WebhookMap {
             model : data.model
         }
 
-        console.log(_webhookMap.action.type)
+        if ( _webhookMap && _webhookMap.action ) {
+            console.log(_webhookMap.action.type);
+        }
+
 
         return _webhookMap
     }
