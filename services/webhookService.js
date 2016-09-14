@@ -14,10 +14,6 @@ class WebhookService {
 
     post(data) {
         let _webhookMap = new WebhookMap();
-
-        console.log(new Date());
-        console.log({"body": data});
-
         return _webhookMap.get(data);
     }
 

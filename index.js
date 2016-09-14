@@ -14,24 +14,14 @@ let log = bunyan.createLogger({
     serializers: bunyan.stdSerializers
 });
 
-function doPost(req, res, next) {
-    log.debug({method: "POST"});
-
-    var trelloServerAddress = req.headers['x-forwarded-for'];
-
-    if ( trelloServerAddress == '107.23.104.115' || trelloServerAddress == '107.23.149.70' || trelloServerAddress == '54.152.166.250' || trelloServerAddress == '54.164.77.56' ) {
-        log.info({'valid': 'true', 'origin': trelloServerAddress})
-    }
-
-    log.info({"body": req.body});
-    doFlush(req, res, next);
+let options = {
+    name: 'vescence-trello-api',
+    log: log
 }
 
-let server = restify.createServer();
+let server = restify.createServer(options);
 
 server.use(restify.bodyParser({ mapParams: false }));
-
-server.name = "trello-api";
 
 new Routes(server);
 
