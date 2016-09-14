@@ -37,8 +37,7 @@ new Routes(server);
 
 let port = (process.env.PORT || 8000);
 
-server.listen(port, function()
-    {
+server.listen( port, function() {
         console.log('%s listening at %s on port %s', server.name, server.url, port)
     }
 );
