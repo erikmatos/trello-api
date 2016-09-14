@@ -1,6 +1,7 @@
 "use strict";
 
 let WebhookService = require('../services/webhookService');
+let _ = require('lodash');
 /**
  * Webhook API.
  * @module Webhook
@@ -10,19 +11,21 @@ class WebhookAPI {
     constructor(server) {
 
         this.logger = server.log;
+        this.trello = new Set(_.split("107.23.104.115,107.23.149.70,54.152.166.250,54.164.77.56", ","));
+        //this.trello = new Set(_.split("127.0.0.1", ","));
+        this.service = new WebhookService();
 
         server.post('/webhook', (req, res, next)=> {
+            let remote = req.headers['x-forwarded-for'];
 
+            if ( this.trello.has(remote) ) {
+                this.service.post(req.body);
+                res.send(200);
+            } else {
+                res.send(401);
+            }
 
-            this.validate(req, res, next);
-
-            let _webhookService = new WebhookService();
-
-            this.logger.info("/webhook");
-            _webhookService.post(req.body);
-
-            res.send(200);
-            next()
+            next();
         });
 
         server.post('/webhook/zapier', (req, res, next)=> {
@@ -41,18 +44,6 @@ class WebhookAPI {
         })
     }
 
-    validate(req, res, next) {
-
-        let trelloServerAddress = req.headers['x-forwarded-for'];
-
-        if ( trelloServerAddress == '107.23.104.115' || trelloServerAddress == '107.23.149.70' || trelloServerAddress == '54.152.166.250' || trelloServerAddress == '54.164.77.56' ) {
-            this.logger.info({'valid': 'true', 'origin': trelloServerAddress})
-        }
-
-        console.log("origin [%s]", trelloServerAddress);
-        console.log(req.headers);
-
-    }
 }
 
 module.exports = WebhookAPI;
