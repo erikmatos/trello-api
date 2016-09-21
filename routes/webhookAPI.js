@@ -20,6 +20,9 @@ class WebhookAPI {
 
             if ( this.trello.has(remote) ) {
                 this.service.post(req.body);
+
+                this.logger.info(req.body);
+
                 res.send(200);
             } else {
                 res.send(401);
