@@ -8,7 +8,7 @@ let Routes = require('./routes');
 
 // Setting a log to get all activities
 let log = bunyan.createLogger({
-    name: 'trello-api',
+    name: 'trello-integration',
     level: process.env.LOG_LEVEL || 'info',
     stream: process.stdout,
     serializers: bunyan.stdSerializers
