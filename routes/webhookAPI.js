@@ -30,6 +30,18 @@ class WebhookAPI {
 
             next();
         });
+
+        server.head('/trello/webhook', (req, res, next)=> {
+            let remote = req.headers['x-forwarded-for'];
+
+            if ( this.trello.has(remote) ) {
+                res.send(200);
+            } else {
+                res.send(401);
+            }
+
+            next();
+        });
     }
 
 }
