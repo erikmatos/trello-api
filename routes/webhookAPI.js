@@ -31,16 +31,6 @@ class WebhookAPI {
             next();
         });
 
-        server.post('/webhook/zapier', (req, res, next)=> {
-            let _webhookService = new WebhookService();
-
-            this.logger.info("/webhook/zapier");
-            _webhookService.post(req.body);
-
-            res.send(200);
-            next()
-        });
-
         server.head('/webhook', (req, res, next)=> {
             res.send(200);
             next()
