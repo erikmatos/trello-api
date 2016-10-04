@@ -32,7 +32,6 @@ class WebhookAPI {
         });
 
         server.head('/webhook', (req, res, next)=> {
-            console.log('XPTO');
             res.send(200);
             next()
         })
