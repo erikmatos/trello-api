@@ -17,13 +17,10 @@ class WebhookAPI {
 
         server.post('/webhook', (req, res, next)=> {
             let remote = req.headers['x-forwarded-for'];
-            this.logger.info(remote);
-            this.logger.info(req.headers);
+            this.logger.info("****" + remote + "****");
             if ( this.trello.has(remote) ) {
                 this.service.post(req.body);
-
-                this.logger.info(req.body);
-
+                this.logger.debug(req.body);
                 res.send(200);
             } else {
                 res.send(401);
