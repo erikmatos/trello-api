@@ -16,15 +16,16 @@ class WebhookAPI {
         this.service = new WebhookService();
 
         server.post('/webhook', (req, res, next)=> {
+
             let remote = req.headers['x-forwarded-for'];
-            this.logger.info("****" + remote + "****");
-            if ( this.trello.has(remote) ) {
-                this.service.post(req.body);
-                this.logger.debug(req.body);
-                res.send(200);
-            } else {
-                res.send(401);
-            }
+
+            this.logger.debug(req.body);
+            this.logger.info(remote);
+            this.logger.info("remote address valid [" + this.trello.has(remote) + "" );
+
+            this.service.post(req.body);
+
+            res.send(200);
 
             next();
         });
@@ -33,6 +34,7 @@ class WebhookAPI {
             let remote = req.headers['x-forwarded-for'];
 
             this.logger.info(remote);
+
             res.send(200);
             next()
         })
