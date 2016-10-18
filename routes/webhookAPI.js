@@ -20,12 +20,12 @@ class WebhookAPI {
             let remote = req.headers['x-forwarded-for'];
 
             this.logger.info(req.body);
-            this.logger.info(req.params.id);
+            //this.logger.info(req.params.id);
 
-            this.logger.info(remote);
-            this.logger.info("remote address valid [" + this.trello.has(remote) + "" );
+            //this.logger.info(remote);
+            //this.logger.info("remote address valid [" + this.trello.has(remote) + "" );
 
-            this.service.post(req.body);
+            //this.service.post(req.body);
 
             res.send(200);
 
