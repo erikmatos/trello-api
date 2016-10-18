@@ -15,11 +15,13 @@ class WebhookAPI {
         //this.trello = new Set(_.split("127.0.0.1", ","));
         this.service = new WebhookService();
 
-        server.post('/webhook', (req, res, next)=> {
+        server.post('/webhook/:id', (req, res, next)=> {
 
             let remote = req.headers['x-forwarded-for'];
 
-            this.logger.debug(req.body);
+            this.logger.info(req.body);
+            this.logger.info(req.params.id);
+
             this.logger.info(remote);
             this.logger.info("remote address valid [" + this.trello.has(remote) + "" );
 
