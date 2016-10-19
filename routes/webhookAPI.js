@@ -17,9 +17,18 @@ class WebhookAPI {
 
         server.post('/webhook/:id', (req, res, next)=> {
 
-            let remote = req.headers['x-forwarded-for'];
+            let referrer = req.headers['x-forwarded-for'];
 
-            this.logger.info(req.body);
+            let payload = req.body;
+
+            let deckID = req.params.deckID;
+
+            console.log(referrer);
+
+            console.log(payload);
+
+            console.log(deckID);
+
             //this.logger.info(req.params.id);
 
             //this.logger.info(remote);
