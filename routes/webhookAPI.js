@@ -21,13 +21,9 @@ class WebhookAPI {
 
             let payload = req.body;
 
-            let deckID = req.params.deckID;
-
             console.log(referrer);
 
             console.log(payload);
-
-            console.log(deckID);
 
             //this.logger.info(req.params.id);
 
