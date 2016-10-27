@@ -21,10 +21,10 @@ class WebhookAPI {
 
             let payload = req.body;
 
-            console.log(referrer);
+            //console.log(referrer);
 
             console.log(payload);
-
+            this.logger.info(payload);
             //this.logger.info(req.params.id);
 
             //this.logger.info(remote);
