@@ -37,7 +37,7 @@ class WebhookAPI {
             next();
         });
 
-        server.head('/webhook', (req, res, next)=> {
+        server.head('/webhook/:id', (req, res, next)=> {
             let remote = req.headers['x-forwarded-for'];
 
             this.logger.info(remote);
@@ -46,23 +46,6 @@ class WebhookAPI {
             next()
         })
 
-        server.post('/auth/bitbucket/callback', (req, res, next)=> {
-            let remote = req.headers['x-forwarded-for'];
-
-            this.logger.info("****" + remote + "****");
-            this.logger.info(req.body);
-            res.send(200);
-            next();
-
-        });
-
-        server.post('/auth/bitbucket/webhook', (req, res, next)=> {
-            let remote = req.headers['x-forwarded-for'];
-
-            this.logger.info(req.body);
-            res.send(200);
-            next()
-        })
 
     }
 
