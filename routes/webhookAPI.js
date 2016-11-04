@@ -9,7 +9,6 @@ class WebhookAPI {
         this.logger = server.log;
         this.trello = new Set(_.split("107.23.104.115,107.23.149.70,54.152.166.250,54.164.77.56", ","));
         //this.trello = new Set(_.split("127.0.0.1", ","));
-        this.service = new WebhookService();
 
         server.post('/webhook/:id', (req, res, next)=> {
 
