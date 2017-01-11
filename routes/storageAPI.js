@@ -21,6 +21,13 @@ class WebhookAPI {
             next();
         });
 
+        server.get('/storage/microsoft', (req, res, next)=> {
+
+            res.send(200);
+
+            next();
+        });
+
         server.post('/storage/oracle', (req, res, next)=> {
 
             this.service.post('oracle', req.body);
