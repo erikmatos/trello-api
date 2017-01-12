@@ -1,5 +1,5 @@
 <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
 
     var options = {
@@ -34,16 +34,16 @@
 
     function openOneDrive() {
 
-        //var accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ilk0dWVLMm9hSU5RaVFiNVlFQlNZVnlEY3BBVSIsImtpZCI6Ilk0dWVLMm9hSU5RaVFiNVlFQlNZVnlEY3BBVSJ9.eyJhdWQiOiI1NWU2ZGUyMC03MTJjLTQ1N2UtOTEwNy1lZjZjZDA4YzFjOWIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC85MTg4MDQwZC02YzY3LTRjNWItYjExMi0zNmEzMDRiNjZkYWQvIiwiaWF0IjoxNDg0MjMyNjQ0LCJuYmYiOjE0ODQyMzI2NDQsImV4cCI6MTQ4NDIzNjU0NCwiYW1yIjpbInB3ZCJdLCJlbWFpbCI6ImVyaWsubWF0b3NAb3V0bG9vay5jb20iLCJmYW1pbHlfbmFtZSI6IkFsdmVzIGRlIE1hdG9zIiwiZ2l2ZW5fbmFtZSI6IkVyaWsiLCJpZHAiOiJsaXZlLmNvbSIsImlwYWRkciI6IjE3OS4xODQuMTU3LjQxIiwibmFtZSI6IkVyaWsgQWx2ZXMgZGUgTWF0b3MiLCJub25jZSI6ImUyZGYwYjUyLWQ0YTgtNGE2MS04MjA3LTM5ZTRiYmFlOGYwYSIsIm9pZCI6ImMxZGQ0NzdmLTgwODYtNDM3Mi1hZTlmLWRlZjVlMzA4M2QyMCIsInBsYXRmIjoiNSIsInN1YiI6IjBkZ3hqaElIem53Ukl5LVg5Z1pmNENtQmtVdksxVFBlWkxDQnZzc1JHU1EiLCJ0aWQiOiI5MTg4MDQwZC02YzY3LTRjNWItYjExMi0zNmEzMDRiNjZkYWQiLCJ1bmlxdWVfbmFtZSI6ImxpdmUuY29tI2VyaWsubWF0b3NAb3V0bG9vay5jb20iLCJ2ZXIiOiIxLjAifQ.Y0G10mYBtEh3OPJ5pbC1GllQcbbh6-1i1JOh6dsA3CWjQb0Qg9OmUf42PnDCnpNA-h-0KQX3ktFzHTvP50pyYsGHBc7sbmMgyIKbdKOBwcjoGcR8Gm5E5GpoNM6GZfwOtccyOz8MD5Fzd7ngovf60vs5m3OARFPI35ASkP7N3AyvXN0ahCwT-GKoqSWrY6mh4bPvUoTw_SParJY9ObgkIeX2MyB3ibQI4XcFiLvph2F-dgamvcX1ZBWEGI8Z3-7NMwap2wQjBgz3b2YORp9_G7R2kjhHinTIIZy5MNd06DZCrTNiaBksTvN0XRzzVlg9rlRoM_LmQ5ogAnAh1vTq-Q";
+        var accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ilk0dWVLMm9hSU5RaVFiNVlFQlNZVnlEY3BBVSIsImtpZCI6Ilk0dWVLMm9hSU5RaVFiNVlFQlNZVnlEY3BBVSJ9.eyJhdWQiOiI1NWU2ZGUyMC03MTJjLTQ1N2UtOTEwNy1lZjZjZDA4YzFjOWIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC85MTg4MDQwZC02YzY3LTRjNWItYjExMi0zNmEzMDRiNjZkYWQvIiwiaWF0IjoxNDg0MjMyNjQ0LCJuYmYiOjE0ODQyMzI2NDQsImV4cCI6MTQ4NDIzNjU0NCwiYW1yIjpbInB3ZCJdLCJlbWFpbCI6ImVyaWsubWF0b3NAb3V0bG9vay5jb20iLCJmYW1pbHlfbmFtZSI6IkFsdmVzIGRlIE1hdG9zIiwiZ2l2ZW5fbmFtZSI6IkVyaWsiLCJpZHAiOiJsaXZlLmNvbSIsImlwYWRkciI6IjE3OS4xODQuMTU3LjQxIiwibmFtZSI6IkVyaWsgQWx2ZXMgZGUgTWF0b3MiLCJub25jZSI6ImUyZGYwYjUyLWQ0YTgtNGE2MS04MjA3LTM5ZTRiYmFlOGYwYSIsIm9pZCI6ImMxZGQ0NzdmLTgwODYtNDM3Mi1hZTlmLWRlZjVlMzA4M2QyMCIsInBsYXRmIjoiNSIsInN1YiI6IjBkZ3hqaElIem53Ukl5LVg5Z1pmNENtQmtVdksxVFBlWkxDQnZzc1JHU1EiLCJ0aWQiOiI5MTg4MDQwZC02YzY3LTRjNWItYjExMi0zNmEzMDRiNjZkYWQiLCJ1bmlxdWVfbmFtZSI6ImxpdmUuY29tI2VyaWsubWF0b3NAb3V0bG9vay5jb20iLCJ2ZXIiOiIxLjAifQ.Y0G10mYBtEh3OPJ5pbC1GllQcbbh6-1i1JOh6dsA3CWjQb0Qg9OmUf42PnDCnpNA-h-0KQX3ktFzHTvP50pyYsGHBc7sbmMgyIKbdKOBwcjoGcR8Gm5E5GpoNM6GZfwOtccyOz8MD5Fzd7ngovf60vs5m3OARFPI35ASkP7N3AyvXN0ahCwT-GKoqSWrY6mh4bPvUoTw_SParJY9ObgkIeX2MyB3ibQI4XcFiLvph2F-dgamvcX1ZBWEGI8Z3-7NMwap2wQjBgz3b2YORp9_G7R2kjhHinTIIZy5MNd06DZCrTNiaBksTvN0XRzzVlg9rlRoM_LmQ5ogAnAh1vTq-Q";
 
-        /*
+
         if ( accessToken ) {
 
             $.ajax({
                 beforeSend: function(request) {
                     request.setRequestHeader("Authorization", 'bearer ' + accessToken);
                 },
-                url: 'https://api.onedrive.com/v1.0',
+                url: 'https://onedrive.live.com',
                 dataType: 'json',
                 success: function(data) {
                     if (data) {
@@ -53,23 +53,23 @@
                 error: function (err, data) {
                     console.log(err);
                 }
-            })(jQuery);
+            });
 
         } else {
-        */
 
-        //signIn();
 
-        var user = authenticationContext.getCachedUser();
-        var divWelcome = document.getElementById('WelcomeMessage');
-        divWelcome.innerHTML = "Welcome " + user.profile.name;
-        //}
+            signIn();
+
+            var user = authenticationContext.getCachedUser();
+            var divWelcome = document.getElementById('WelcomeMessage');
+            divWelcome.innerHTML = "Welcome " + user.profile.name;
+        }
     }
 </script>
 
 <html>
     <body>
-        <button id="SignIn" onclick="signIn()">One Drive</button>
+        <button id="SignIn" onclick="openOneDrive()">One Drive</button>
         <h4 id="WelcomeMessage"></h4>
 
 
