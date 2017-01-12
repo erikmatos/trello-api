@@ -19,6 +19,7 @@
 
     function userSignedIn(err, token) {
         console.log('userSignedIn called');
+        console.log('token [%s]', token);
         if (!err) {
             console.log("token: " + token);
             showWelcomeMessage();
@@ -37,7 +38,7 @@
 </script>
 
 <html>
-    <body>
+    <body onload="">
         <button id="SignIn" onclick="signIn()">Sign In</button>
         <h4 id="WelcomeMessage"></h4>
     </body>
