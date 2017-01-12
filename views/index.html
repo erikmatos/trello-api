@@ -1,97 +1,31 @@
-<script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="https://js.live.net/v7.0/OneDrive.js" id="onedrive-js" client-id="55e6de20-712c-457e-9107-ef6cd08c1c9b"></script>
 <script>
 
-    var options = {
-        instance: 'https://login.microsoftonline.com/',
-        tenant: 'common', //COMMON OR YOUR TENANT ID
+    var pickerOptions = {
+        success: function(files) {
+            // Handle returned file object(s)
+            alert("You picked " + files.values[0].fileName);
+        },
 
-        clientId: '55e6de20-712c-457e-9107-ef6cd08c1c9b', //This is your client ID
-        redirectUri: 'https://kyra-consulting.herokuapp.com/storage/microsoft', //This is your redirect URI
+        cancel: function() {
+            // handle when the user cancels picking a file
+        },
 
-        callback: callback,
-        popUp: true
+        linkType: "webViewLink", // "downloadLink" | "webViewLink",
+        multiSelect: false // or true
     }
 
-    var authenticationContext = new AuthenticationContext(options);
-
-    function signIn() {
-        authenticationContext.login();
-    }
-
-    function callback(err, token) {
-
-        if (!err) {
-
-            let width = 800;
-            let height = 650;
-            let left = window.screenX + (window.innerWidth - width) / 2;
-            let top = window.screenY + (window.innerHeight - height) / 2;
-            let oneDriveUrl = 'https://onedrive.live.com';
-            let opts = "width=" + width + ",height=" + height + ",left=" + left + ",top=" +  top;
-
-            let authWindow = window.open(oneDriveUrl, 'Microsoft One Drive', opts, true);
-
-            let receiveMessage = function(event) {
-                var ref2;
-
-                if ((ref2 = event.source) != null) {
-                    ref2.close();
-                }
-
-                if ((event.data != null) && /[0-9a-f]{64}/.test(event.data)) {
-                    //that.success('trello', event.data);
-                    console.log(event.data);
-                } else {
-                    //that.unsuccess();
-                }
-
-                if (typeof window.removeEventListener === 'function') {
-                    window.removeEventListener('message', receiveMessage, false);
-                }
-            };
-
-            return typeof window.addEventListener === 'function' ? window.addEventListener('message', receiveMessage, false) : void 0;
-        }
-        else {
-            console.error("error: " + err);
-        }
-    }
-
-    function openOneDrive(token) {
-
-        if ( token ) {
-
-            $.ajax({
-                beforeSend: function(request) {
-                    request.setRequestHeader("Authorization", 'bearer ' + token);
-                },
-                url: 'https://onedrive.live.com',
-                dataType: 'json',
-                success: function(data) {
-                    if (data) {
-                        console.log(data);
-                    }
-                },
-                error: function (err, data) {
-                    console.log(err);
-                }
-            });
-
-        } else {
-
-
-            signIn();
-
-
-        }
+    window.onload = function() {
+        var pickerOptions = { /* ... */ };
+        var pickerButton = OneDrive.createOpenButton(pickerOptions);
+        document.getElementById("picker").appendChild(pickerButton);
     }
 </script>
 
 <html>
     <body>
-        <button id="SignIn" onclick="signIn()">One Drive</button>
-        <h4 id="WelcomeMessage"></h4>
+
+        <div id="picker"></div>
 
 
     </body>
