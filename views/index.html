@@ -1,30 +1,23 @@
-<script
-        type="text/javascript"
-        src="https://js.live.net/v5.0/OneDrive.js"
-        id="onedrive-js" client-id="55e6de20-712c-457e-9107-ef6cd08c1c9b">
+<script type="text/javascript" src="https://js.live.net/v7.0/OneDrive.js"></script>
 
-</script>
 <script>
 
 
 
-    function onload() {
+    function openOneDrive() {
 
-        var pickerOptions = {
-            success: function(files) {
-                // Handle returned file object(s)
-                alert("You picked " + files.values[0].fileName);
-            },
-
-            cancel: function() {
-                // handle when the user cancels picking a file
-            },
-
-            linkType: "downloadLink", // "downloadLink" | "webViewLink",
-            multiSelect: false // or true
+        var options = {
+            clientId: "55e6de20-712c-457e-9107-ef6cd08c1c9b",
+            action: "download", //share | download | query
+            multiSelect: true,
+            openInNewWindow: true,
+            advanced: {},
+            success: function(files) { console.log(files) },
+            cancel: function() { console.log('cancel')},
+            error: function(e) { console.log(e) }
         }
-        var pickerButton = OneDrive.createOpenButton(pickerOptions);
-        document.getElementById("picker").appendChild(pickerButton);
+
+        OneDrive.open(options);
     }
 </script>
 
@@ -33,7 +26,7 @@
 
         <form>
 
-            <div id="picker"></div>
+            <button onClick="openOneDrive()">Open from OneDrive</button>
         </form>
 
 
