@@ -21,11 +21,37 @@
 
     function callback(err, token) {
 
-        console.log('userSignedIn called');
         if (!err) {
-            console.log("token: " + token);
-            window.location.href = 'https://onedrive.live.com';
-            //openOneDrive(token);
+
+            let width = 800;
+            let height = 650;
+            let left = window.screenX + (window.innerWidth - width) / 2;
+            let top = window.screenY + (window.innerHeight - height) / 2;
+            let oneDriveUrl = 'https://onedrive.live.com';
+            let opts = "width=" + width + ",height=" + height + ",left=" + left + ",top=" +  top;
+
+            let authWindow = window.open(oneDriveUrl, 'Microsoft One Drive', opts, true);
+
+            let receiveMessage = function(event) {
+                var ref2;
+
+                if ((ref2 = event.source) != null) {
+                    ref2.close();
+                }
+
+                if ((event.data != null) && /[0-9a-f]{64}/.test(event.data)) {
+                    //that.success('trello', event.data);
+                    console.log(event.data);
+                } else {
+                    //that.unsuccess();
+                }
+
+                if (typeof window.removeEventListener === 'function') {
+                    window.removeEventListener('message', receiveMessage, false);
+                }
+            };
+
+            return typeof window.addEventListener === 'function' ? window.addEventListener('message', receiveMessage, false) : void 0;
         }
         else {
             console.error("error: " + err);
