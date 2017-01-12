@@ -15,13 +15,28 @@ let log = bunyan.createLogger({
 });
 
 let options = {
-    name: 'vescence-trello-api',
+    name: 'integration-proof-of-concept',
     log: log
 }
 
 let server = restify.createServer(options);
 
 server.use(restify.bodyParser({ mapParams: false }));
+
+server.get('/', function indexHTML(req, res, next) {
+
+    fs.readFile(__dirname + '/views/index.html', function (err, data) {
+        if (err) {
+            next(err);
+            return;
+        }
+
+        res.setHeader('Content-Type', 'text/html');
+        res.writeHead(200);
+        res.end(data);
+        next();
+    });
+});
 
 new Routes(server);
 
