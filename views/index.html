@@ -13,19 +13,9 @@
 
             if ( response && response.value && response.value.length > 0 ) {
 
-                console.log(response.value[0]["@microsoft.graph.downloadUrl"]);
+                var url = response.value[0]["@microsoft.graph.downloadUrl"];
 
-                var file = { url: response.value[0].webUrl, name: response.value[0].name };
-
-
-                var message = " File : " + file.name + " <br/> ";
-
-                message += " Url : " + file.url + " <br/> ";
-
-                document.getElementById('pickerConsole').innerHTML = "";
-                document.getElementById('pickerConsole').innerHTML += message;
-
-                $.ajax( file.url,
+                $.ajax( url,
                     {
                         'xhrFields' : {
                             'responseType' : 'blob'
