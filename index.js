@@ -38,6 +38,21 @@ server.get('/', function indexHTML(req, res, next) {
     });
 });
 
+server.get('/callback', function indexHTML(req, res, next) {
+
+    fs.readFile(__dirname + '/views/index.html', function (err, data) {
+        if (err) {
+            next(err);
+            return;
+        }
+
+        res.setHeader('Content-Type', 'text/html');
+        res.writeHead(200);
+        res.end(data);
+        next();
+    });
+});
+
 new Routes(server);
 
 let port = (process.env.PORT || 8000);
