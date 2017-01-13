@@ -24,10 +24,6 @@
 
                     $.ajax( url,
                         {
-                            'xhrFields' : {
-                                'responseType' : 'blob'
-                            },
-                            'dataType' : 'binary',
                             success: function(status, data) {
                                 console.log(status);
                                 console.log(data);
