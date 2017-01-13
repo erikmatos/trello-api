@@ -6,11 +6,12 @@
 
         var options = {
             clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
-            action: "download", //share | download | query
+            action: "query", //share | download | query
             multiSelect: false,
             openInNewWindow: true,
             advanced: {
-                redirectUri: "https://kyra-consulting.herokuapp.com/callback"},
+                queryParameters: "select=id,name,size,file,folder,photo,@microsoft.graph.downloadUrl"
+            },
             success: function(files) { console.log(files) },
             cancel: function() { console.log('cancel')},
             error: function(e) { console.log(e) }
