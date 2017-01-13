@@ -13,6 +13,8 @@
 
             if ( response && response.value && response.value.length > 0 ) {
 
+                console.log(response.value[0]["@microsoft.graph.downloadUrl"]);
+
                 var file = { url: response.value[0].webUrl, name: response.value[0].name };
 
 
