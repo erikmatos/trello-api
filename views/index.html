@@ -6,18 +6,26 @@
 
         var options = {
             clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
-            action: "query", //share | download | query
+            action: "download",
             multiSelect: false,
-            openInNewWindow: true,
-            advanced: {
-                queryParameters: "select=id,name,size,file,folder,photo,@microsoft.graph.downloadUrl"
-            },
-            success: function(files) { console.log(files) },
-            cancel: function() { console.log('cancel')},
-            error: function(e) { console.log(e) }
-        }
 
-        OneDrive.open(options);
+            success: function (files) {
+
+                document.getElementById('pickerConsole').innerHTML = "";
+                document.getElementById('pickerConsole').innerHTML += JSON.stringify(files, null, '');
+
+            },
+
+            cancel: function() {
+                console.log('cancel')
+            },
+
+            error: function(e) {
+                console.log(e)
+            }
+        };
+
+        OneDrive.open(options)
     }
 </script>
 
@@ -29,6 +37,9 @@
             <button onClick="openOneDrive()">Open from OneDrive</button>
         </form>
 
+    <div id="pickerConsole">
+
+    </div>
 
     </body>
 </html>
