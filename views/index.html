@@ -6,7 +6,7 @@
         clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
         action: "download",
         multiSelect: false,
-
+        openInNewWindow: true,
         success: function (files) {
 
             document.getElementById('pickerConsole').innerHTML = "";
@@ -33,7 +33,7 @@
 
         <form>
 
-            <button onClick="openOneDrive()">Open from OneDrive</button>
+            <button type="button" onclick="openOneDrive()" title="Open from OneDrive"/>
         </form>
 
     <div id="pickerConsole">
