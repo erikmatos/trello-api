@@ -1,31 +1,30 @@
 <script type="text/javascript" src="https://js.live.net/v7.0/OneDrive.js"></script>
 
-<script>
+<script type="text/javascript">
+
+    var odOptions = {
+        clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
+        action: "download",
+        multiSelect: false,
+
+        success: function (files) {
+
+            document.getElementById('pickerConsole').innerHTML = "";
+            document.getElementById('pickerConsole').innerHTML += JSON.stringify(files, null, '');
+
+        },
+
+        cancel: function() {
+            console.log('cancel');
+        },
+
+        error: function(e) {
+            console.log(e)
+        }
+    };
 
     function openOneDrive() {
-
-        var options = {
-            clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
-            action: "download",
-            multiSelect: false,
-
-            success: function (files) {
-
-                document.getElementById('pickerConsole').innerHTML = "";
-                document.getElementById('pickerConsole').innerHTML += JSON.stringify(files, null, '');
-
-            },
-
-            cancel: function() {
-                console.log('cancel')
-            },
-
-            error: function(e) {
-                console.log(e)
-            }
-        };
-
-        OneDrive.open(options)
+        OneDrive.open(odOptions);
     }
 </script>
 
