@@ -5,27 +5,36 @@
 
     var odOptions = {
         clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
-        action: "query",
+        action: "share",
         multiSelect: false,
         openInNewWindow: true,
         success: function (response) {
 
+            console.log(response);
 
             if ( response && response.value && response.value.length > 0 ) {
 
-                var url = response.value[0]["@microsoft.graph.downloadUrl"];
+                var file = response.value[0];
 
-                $.ajax( url,
-                    {
-                        'xhrFields' : {
-                            'responseType' : 'blob'
-                        },
-                        'dataType' : 'binary',
-                        success: function(result) {
-                            console.log(result);
+                if ( file && file.thumbnails && file.thumbnails.length > 0 ) {
+
+                    var thumbnails = file.thumbnails[0];
+
+                    var url = thumbnails.large.url;
+
+                    $.ajax( url,
+                        {
+                            'xhrFields' : {
+                                'responseType' : 'blob'
+                            },
+                            'dataType' : 'binary',
+                            success: function(status, data) {
+                                console.log(status);
+                                console.log(data);
+                            }
                         }
-                    }
-                )
+                    )
+                }
 
             }
 
