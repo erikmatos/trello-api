@@ -9,7 +9,8 @@
             action: "download", //share | download | query
             multiSelect: false,
             openInNewWindow: true,
-            advanced: {},
+            advanced: {
+                redirectUri: "https://kyra-consulting.herokuapp.com/callback"},
             success: function(files) { console.log(files) },
             cancel: function() { console.log('cancel')},
             error: function(e) { console.log(e) }
