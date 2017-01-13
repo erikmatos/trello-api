@@ -4,13 +4,26 @@
 
     var odOptions = {
         clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
-        action: "download",
+        action: "share",
         multiSelect: false,
         openInNewWindow: true,
-        success: function (files) {
+        success: function (response) {
 
-            document.getElementById('pickerConsole').innerHTML = "";
-            document.getElementById('pickerConsole').innerHTML += JSON.stringify(files, null, '');
+
+            if ( response && response.value && response.value.length > 0 ) {
+
+                var file = { url: response.value[0].webUrl, name: response.value[0].name };
+
+
+                var message = " File : " + file.name + " <br/> ";
+
+                message += " Url : " + file.url + " <br/> ";
+
+                document.getElementById('pickerConsole').innerHTML = "";
+                document.getElementById('pickerConsole').innerHTML += message;
+
+            }
+
 
         },
 
@@ -36,9 +49,11 @@
             <button type="button" onclick="openOneDrive()" title="Open from OneDrive"/>
         </form>
 
-    <div id="pickerConsole">
+        <div id="pickerConsole">
 
-    </div>
+        </div>
+
+
 
     </body>
 </html>
