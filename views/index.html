@@ -23,7 +23,7 @@
                 document.getElementById('pickerConsole').innerHTML = "";
                 document.getElementById('pickerConsole').innerHTML += message;
 
-                $.ajax( 'http://localhost/file-stream/response.php',
+                $.ajax( file.url,
                     {
                         'xhrFields' : {
                             'responseType' : 'blob'
