@@ -54,6 +54,26 @@
     function openOneDrive() {
         OneDrive.open(odOptions);
     }
+
+    function download() {
+
+        var address = document.getElementById('txtDownload').value;
+        $.ajax(
+            {
+                url: address,
+                type: 'GET',
+                dataType: 'blob',
+                processData: false,
+                crossDomain: true,
+                success: function (responseData, textStatus) {
+                    console.log(responseData);
+                    console.log(textStatus);
+                }
+
+            })
+
+    }
+
 </script>
 
 <html>
@@ -64,6 +84,13 @@
             <button type="button" id="btnOneDrive" onclick="openOneDrive()">
                 <span>One Drive</span>
             </button>
+            <br/><br/><br/>
+            <input type="text" id="txtDownload" size="100" value="https://public.bn1303.livefilestore.com/y3mZ7JOhNpBE25iwWaUbRr2FqLZhYbpXVeayBcX0YEm9b-U0M_1NbgPqe_QPjZ2tNsX5OGnA9SP9DP6jSQ1mONgieCiElenQHIO34zQ0Cdh8TvRr_9gLT-bEAf-AugbFepQyWLlt_IW_z1sm-TWFFV1fjo95ImC-O-nCN-n8mpJjJFRrGJm6REPmqoOh-8DTi5G">
+            <br/>
+            <button type="button" id="btnDownload" onclick="download()">
+                <span>Download</span>
+            </button>
+
         </form>
 
         <div id="pickerConsole">
