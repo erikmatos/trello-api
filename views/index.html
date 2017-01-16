@@ -10,16 +10,13 @@
         openInNewWindow: true,
         success: function (response) {
 
-
             if ( response && response.value && response.value.length > 0 ) {
 
                 var file = response.value[0];
 
-                if ( file && file.thumbnails && file.thumbnails.length > 0 ) {
+                if ( file && file.webUrl ) {
 
-                    var thumbnails = file.thumbnails[0];
-
-                    var url = thumbnails.large.url;
+                    var url = file.webUrl;
 
                     $.ajax( url,
                         {
