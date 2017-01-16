@@ -5,9 +5,12 @@
 
     var odOptions = {
         clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
-        action: "share",
+        action: "download",
         multiSelect: false,
         openInNewWindow: true,
+        advanced: {
+            queryParameters: "select=id,name,size,file,@microsoft.graph.downloadUrl,@content.downloadUrl"
+        },
         success: function (response) {
 
             if ( response && response.webUrl ) {
