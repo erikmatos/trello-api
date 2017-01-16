@@ -25,10 +25,7 @@
                         type: 'GET',
                         dataType: 'binary',
                         processData: false,
-                        headers: {
-                            'Content-Type':'image/png',
-                            'X-Requested-With':'XMLHttpRequest'
-                        },
+                        crossDomain: true,
                         success: function (result) {
 
                             console.log(result)
