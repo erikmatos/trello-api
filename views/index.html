@@ -58,19 +58,15 @@
     function download() {
 
         var address = document.getElementById('txtDownload').value;
-        $.ajax(
-            {
-                url: address,
-                type: 'GET',
-                dataType: 'blob',
-                processData: false,
-                crossDomain: true,
-                success: function (responseData, textStatus) {
-                    console.log(responseData);
-                    console.log(textStatus);
-                }
 
-            })
+        var xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.open('GET', address, true);
+        xmlHttpRequest.overrideMimeType('text/plain; charset=x-user-defined');
+        xmlHttpRequest.send(null);
+
+        if ( xmlHttpRequest.status == 200) {
+            console.log(xmlHttpRequest.responseText);
+        }
 
     }
 
