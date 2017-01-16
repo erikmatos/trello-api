@@ -24,10 +24,9 @@
                         {
                             url: address,
                             type: 'GET',
-                            dataType: 'jsonp',
+                            dataType: 'binary',
                             processData: false,
                             crossDomain: true,
-                            jsonp: false,
                             success: function (responseData, textStatus, jqXHR) {
                                 console.log(responseData);
                                 console.log(textStatus);
