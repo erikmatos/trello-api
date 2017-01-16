@@ -59,14 +59,16 @@
 
         var address = document.getElementById('txtDownload').value;
 
-        var xmlHttpRequest = new XMLHttpRequest();
-        xmlHttpRequest.open('GET', address, true);
-        xmlHttpRequest.overrideMimeType('text/plain; charset=x-user-defined');
-        xmlHttpRequest.send(null);
+        $.ajax({
+            url: address,
+            beforeSend: function( xhr ) {
+                xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+            },
 
-        if ( xmlHttpRequest.status == 200) {
-            console.log(xmlHttpRequest.responseText);
-        }
+        })
+        .done(function( data ) {
+            console.log(data);
+        });
 
     }
 
