@@ -10,7 +10,6 @@
         openInNewWindow: true,
         success: function (response) {
 
-            console.log(response);
 
             if ( response && response.value && response.value.length > 0 ) {
 
@@ -25,8 +24,13 @@
                     $.ajax( url,
                         {
                             success: function(status, data) {
+
+                                console.log('*********************************************');
                                 console.log(status);
+                                console.log('*********************************************');
                                 console.log(data);
+                                console.log('*********************************************');
+
                             }
                         }
                     )
