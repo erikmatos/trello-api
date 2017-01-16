@@ -8,30 +8,36 @@
         action: "download",
         multiSelect: false,
         openInNewWindow: true,
-        advanced: {
-            queryParameters: "select=id,name,size,file,@microsoft.graph.downloadUrl,@content.downloadUrl"
-        },
         success: function (response) {
 
-            if ( response && response.webUrl ) {
+            if ( response && response.value && response.value.length > 0 ) {
 
-                console.log('*********************************************');
-                console.log(response.webUrl);
+                var file = response.value[0];
 
-                $.ajax( response.webUrl,
-                    {
-                        crossDomain: true,
-                        success: function(status, data) {
+                if ( file ) {
 
-                            console.log('*********************************************');
-                            console.log(status);
-                            console.log('*********************************************');
-                            console.log(data);
-                            console.log('*********************************************');
+                    var url = file['@microsoft.graph.downloadUrl'];
 
+                    console.log('*********************************************');
+                    console.log(url);
+
+                    $.ajax( url,
+                        {
+                            dataType : 'binary',
+                            crossDomain: true,
+                            success: function(status, data) {
+
+                                console.log('*********************************************');
+                                console.log(status);
+                                console.log('*********************************************');
+                                console.log(data);
+                                console.log('*********************************************');
+
+                            }
                         }
-                    }
-                )
+                    )
+                }
+
             }
 
 
