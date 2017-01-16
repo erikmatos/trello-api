@@ -17,24 +17,27 @@
                 if ( file ) {
 
                     var url = file['@microsoft.graph.downloadUrl'];
+                    var name = file.name;
+                    var size = file.size;
 
-                    console.log('*********************************************');
-                    console.log(url);
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        dataType: 'binary',
+                        processData: false,
+                        headers: {
+                            'Content-Type':'image/png',
+                            'X-Requested-With':'XMLHttpRequest'
+                        },
+                        success: function (result) {
 
-                    $.ajax( url,
-                        {
-                            crossDomain: true,
-                            success: function(status, data) {
+                            console.log(result)
 
-                                console.log('*********************************************');
-                                console.log(status);
-                                console.log('*********************************************');
-                                console.log(data);
-                                console.log('*********************************************');
 
-                            }
                         }
-                    )
+
+                    })
+
                 }
 
             }
