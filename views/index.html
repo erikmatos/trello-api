@@ -10,35 +10,24 @@
         openInNewWindow: true,
         success: function (response) {
 
-            if ( response && response.value && response.value.length > 0 ) {
+            if ( response && response.webUrl ) {
 
                 console.log('*********************************************');
                 console.log(response.webUrl);
 
-                var file = response.value[0];
+                $.ajax( response.webUrl,
+                    {
+                        success: function(status, data) {
 
-                if ( file && file.webUrl ) {
+                            console.log('*********************************************');
+                            console.log(status);
+                            console.log('*********************************************');
+                            console.log(data);
+                            console.log('*********************************************');
 
-                    var url = file.webUrl;
-
-                    console.log('*********************************************');
-                    console.log(url);
-
-                    $.ajax( url,
-                        {
-                            success: function(status, data) {
-
-                                console.log('*********************************************');
-                                console.log(status);
-                                console.log('*********************************************');
-                                console.log(data);
-                                console.log('*********************************************');
-
-                            }
                         }
-                    )
-                }
-
+                    }
+                )
             }
 
 
