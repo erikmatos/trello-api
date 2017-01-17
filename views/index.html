@@ -1,75 +1,27 @@
 <script type="text/javascript" src="https://js.live.net/v7.0/OneDrive.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <script type="text/javascript">
 
-    var odOptions = {
+    var options = {
         clientId: "7edbafbd-ec98-44d4-9e2d-9b5229f2e78c",
-        action: "download",
+        action: "share",
         multiSelect: false,
         openInNewWindow: true,
         success: function (response) {
 
-            if ( response && response.value && response.value.length > 0 ) {
+            if ( response && response.webUrl ) {
 
-                var file = response.value[0];
-
-                if ( file ) {
-
-                    var address = file['@microsoft.graph.downloadUrl'];
-                    var name = file.name;
-                    var size = file.size;
-
-                    $.ajax(
-                        {
-                            url: address,
-                            type: 'GET',
-                            dataType: 'binary',
-                            processData: false,
-                            crossDomain: true,
-                            success: function (responseData, textStatus, jqXHR) {
-                                console.log(responseData);
-                                console.log(textStatus);
-                                console.log(jqXHR);
-                            }
-
-                    })
-
-                }
+                document.getElementById('pickerConsole').innerHTML = "";
+                document.getElementById('pickerConsole').innerHTML = response.webUrl;
 
             }
 
 
-        },
-
-        cancel: function() {
-            console.log('cancel');
-        },
-
-        error: function(e) {
-            console.log(e)
         }
     };
 
     function openOneDrive() {
-        OneDrive.open(odOptions);
-    }
-
-    function download() {
-
-        var address = document.getElementById('txtDownload').value;
-
-        $.ajax({
-            url: address,
-            beforeSend: function( xhr ) {
-                xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
-            },
-
-        })
-        .done(function( data ) {
-            console.log(data);
-        });
-
+        OneDrive.open(options);
     }
 
 </script>
@@ -78,15 +30,9 @@
     <body>
 
         <form>
-
+            <i class="fa fa-windows" aria-hidden="true"></i>
             <button type="button" id="btnOneDrive" onclick="openOneDrive()">
                 <span>One Drive</span>
-            </button>
-            <br/><br/><br/>
-            <input type="text" id="txtDownload" size="100" value="https://public.bn1303.livefilestore.com/y3mZ7JOhNpBE25iwWaUbRr2FqLZhYbpXVeayBcX0YEm9b-U0M_1NbgPqe_QPjZ2tNsX5OGnA9SP9DP6jSQ1mONgieCiElenQHIO34zQ0Cdh8TvRr_9gLT-bEAf-AugbFepQyWLlt_IW_z1sm-TWFFV1fjo95ImC-O-nCN-n8mpJjJFRrGJm6REPmqoOh-8DTi5G">
-            <br/>
-            <button type="button" id="btnDownload" onclick="download()">
-                <span>Download</span>
             </button>
 
         </form>
