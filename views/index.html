@@ -1,4 +1,6 @@
 <script type="text/javascript" src="https://js.live.net/v7.0/OneDrive.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+
 
 <script type="text/javascript">
 
@@ -26,18 +28,100 @@
 
 </script>
 
+<script type="text/javascript">
+
+    // The Browser API key obtained from the Google Developers Console.
+    // Replace with your own Browser API key, or your own key.
+    var developerKey = 'AIzaSyAyzaKcF3jSen6GAiIdQo17kKgUSyJZgK4';
+
+    // The Client ID obtained from the Google Developers Console. Replace with your own Client ID.
+    var clientId = "384185569338-mug5m2dillj4j97fv9p57n04nh6r2no2.apps.googleusercontent.com"
+
+    // Replace with your own App ID. (Its the first number in your Client ID)
+    var appId = "384185569338";
+
+    // Scope to use to access user's Drive items.
+    var scope = ['https://www.googleapis.com/auth/drive.readonly'];
+
+    var pickerApiLoaded = false;
+    var oauthToken;
+
+    // Use the Google API Loader script to load the google.picker script.
+    function loadPicker() {
+        gapi.load('auth', {'callback': onAuthApiLoad});
+        gapi.load('picker', {'callback': onPickerApiLoad});
+    }
+
+    function onAuthApiLoad() {
+        window.gapi.auth.authorize({'client_id': clientId, 'scope': scope, 'immediate': false}, handleAuthResult);
+    }
+
+    function onPickerApiLoad() {
+        pickerApiLoaded = true;
+        createPicker();
+    }
+
+    function handleAuthResult(authResult) {
+        if (authResult && !authResult.error) {
+            oauthToken = authResult.access_token;
+            createPicker();
+        }
+    }
+
+    // Create and render a Picker object for searching images.
+    function createPicker() {
+
+        if (pickerApiLoaded && oauthToken) {
+
+            var view = new google.picker.View(google.picker.ViewId.DOCS);
+
+            var picker = new google.picker.PickerBuilder()
+                .setAppId(appId)
+                .setOAuthToken(oauthToken)
+                .addView(view)
+                .setDeveloperKey(developerKey)
+                .setCallback(pickerCallback)
+                .build();
+
+            picker.setVisible(true);
+        }
+    }
+
+    // A simple callback implementation.
+    function pickerCallback(data) {
+        if (data.action == google.picker.Action.PICKED) {
+            //var fileId = data.docs[0].id;
+            //alert('The user selected: ' + fileId);
+            console.log(data.docs[0]);
+        }
+    }
+
+
+</script>
+
 <html>
     <body>
 
         <form>
-            <i class="fa fa-windows" aria-hidden="true"></i>
+
             <button type="button" id="btnOneDrive" onclick="openOneDrive()">
                 <span>One Drive</span>
+            </button>
+            <br />
+            <br />
+            <br />
+            <button type="button" id="btnGoogleDrive" onclick="loadPicker()">
+                <span>Google Drive</span>
             </button>
 
         </form>
 
         <div id="pickerConsole">
+
+        </div>
+
+        <div id="result">
+
 
         </div>
 
