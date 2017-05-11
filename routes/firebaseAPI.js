@@ -9,7 +9,7 @@ class FirebaseAPI {
     constructor(server) {
 
         this.logger = server.log;
-        this.service = new FirebaseService();
+        this.service = new FirebaseService(this.logger);
 
         server.post('/firebase', (req, res, next)=> {
 
