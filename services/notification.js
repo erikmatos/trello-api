@@ -14,7 +14,7 @@ class NotificationService {
     notify(payload) {
 
         //sender
-        let sender = new gcm.Sender('AIzaSyCVPK-NxED8LiXpAmrJ812I4Gs7NusEmhM');
+        let sender = new gcm.Sender('AIzaSyD8RliMyxFtzawGM2iZwpYYS5glxnDaiWc');
 
         // Prepare a message to be sent
         let message = new gcm.Message({data: { key1: 'msg1' }});
