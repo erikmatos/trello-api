@@ -14,13 +14,13 @@ class NotificationService {
     notify(payload) {
 
         //sender
-        let sender = new gcm.Sender('AIzaSyD8RliMyxFtzawGM2iZwpYYS5glxnDaiWc');
+        let sender = new gcm.Sender('AIzaSyAASEsaRIz8KT2Z-rK__1fJP4rglhe7jJM');
 
         // Prepare a message to be sent
-        let message = new gcm.Message({data: { key1: 'msg1' }});
+        let message = new gcm.Message({notification: { from: 'Erik', message: 'Hello Dear!' }});
 
         // Specify which registration IDs to deliver the message to
-        let regTokens = ['dbZimjABRyY:APA91bGamkoBIanpM3Otb58mEsMsU06dh-DYkKJIQprCmwbajotRX7wGk63sGe_lZsQ1LvyyMZOOGoWCPRasVu0IybIKUFc9ly5TLdZZbBJPHcMB5oDBY-dLnGgbfIiVFhmW5mupp6g4'];
+        let regTokens = ['APA91bGamkoBIanpM3Otb58mEsMsU06dh-DYkKJIQprCmwbajotRX7wGk63sGe_lZsQ1LvyyMZOOGoWCPRasVu0IybIKUFc9ly5TLdZZbBJPHcMB5oDBY-dLnGgbfIiVFhmW5mupp6g4'];
 
         // Actually send the message
         sender.send(message, { registrationTokens: regTokens }, function (err, response) {
