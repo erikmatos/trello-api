@@ -14,7 +14,7 @@ class NotificationAPI {
         server.post('/notification', (req, res, next)=> {
 
 
-            this.service.send(req.body);
+            this.service.notify(req.body);
 
             res.send(200);
 
