@@ -19,28 +19,45 @@ class FirebaseService {
 
         let application = firebase.initializeApp({credential: credential, databaseURL: "https://vescence-edce3.firebaseio.com"});
 
+        this.messaging = firebase.messaging();
+
         logger.info("Google Application Loaded");
 
         console.log(application.name);
     }
 
-    send(message){
+    send(data){
 
-        const messaging = firebase.messaging();
+
+
+        let registrationTokens = [];
+
+        registrationTokens.push(data.token);
+
+        let payload = {
+            notification: {
+                title: data.title,
+                text: data.text
+            }
+        };
 
         Promise.resolve(
-            messaging.requestPermission()
-            .then(data => {
+            this.messaging.sendToDevice(registrationTokens, payload)
+                .then(data =>{
+                    if ( data ) {
+                        let hasError = data.failureCount > 0 ? true : false;
+                        if ( hasError ) {
+                            if ( data.results && data.results.length > 0 ) {
+                                data.results.forEach(item =>{
 
-                console.log('Notification permission granted.');
-                console.log(data);
-
-                // TODO(developer): Retrieve an Instance ID token for use with FCM.
-                // ...
-            })
-            .catch( err => {
-                console.log('Unable to get permission to notify.', err);
-            })
+                                    if ( item.error ) {
+                                        console.log(item.error.message);
+                                    }
+                                })
+                            }
+                        }
+                    }
+                })
         )
 
 
