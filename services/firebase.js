@@ -24,6 +24,7 @@ class FirebaseService {
         logger.info("Google Application Loaded");
 
         console.log(application.name);
+
     }
 
     send(data){

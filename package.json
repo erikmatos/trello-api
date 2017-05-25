@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "dependencies": {
+    "apn": "^2.1.4",
     "bluebird": "3.4.6",
     "bunyan": "1.5.1",
     "crypto": "0.0.3",
