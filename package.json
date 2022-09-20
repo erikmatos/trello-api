@@ -12,7 +12,7 @@
     "firebase": "^3.9.0",
     "firebase-admin": "^4.2.1",
     "lodash": ">=4.17.21",
-    "mongoose": "4.3.1",
+    "mongoose": "5.13.15",
     "node-fcm": "^1.0.3",
     "node-gcm": "^0.14.6",
     "restify": "4.1.1"
